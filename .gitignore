@@ -62,3 +62,6 @@ nb-configuration.xml
 
 ## OS Specific
 .DS_Store
+
+## Imgui Specific
+lwjgl3/imgui.ini
