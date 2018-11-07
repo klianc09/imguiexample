@@ -5,9 +5,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.graphics.GL20;
 import imgui.Context;
-import imgui.ContextKt;
 import imgui.ImGui;
-import imgui.impl.LwjglGL3;
+import imgui.impl.ImplGL3;
+import imgui.impl.LwjglGlfw;
 import uno.glfw.GlfwWindow;
 
 /**
@@ -16,7 +16,8 @@ import uno.glfw.GlfwWindow;
 public class Main extends ApplicationAdapter {
 
     //ImGui Singleton Instances
-    private LwjglGL3 lwjglGL3 = LwjglGL3.INSTANCE;
+    private LwjglGlfw lwjglGlfw = LwjglGlfw.INSTANCE;
+    private ImplGL3 lwjglGL3 = ImplGL3.INSTANCE;
     private ImGui imgui = ImGui.INSTANCE;
 
     private Context ctx;
@@ -27,7 +28,7 @@ public class Main extends ApplicationAdapter {
 
         Lwjgl3Graphics lwjgl3Graphics = (Lwjgl3Graphics) Gdx.graphics;
         long windowHandle = lwjgl3Graphics.getWindow().getWindowHandle();
-        lwjglGL3.init(new GlfwWindow(windowHandle), false);
+        lwjglGlfw.init(new GlfwWindow(windowHandle), true, LwjglGlfw.GlfwClientApi.OpenGL);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class Main extends ApplicationAdapter {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
-        lwjglGL3.newFrame();
+        lwjglGlfw.newFrame();
 
         boolean[] showDemo = {true};
         imgui.showDemoWindow(showDemo);
@@ -49,7 +50,7 @@ public class Main extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-        lwjglGL3.shutdown();
-        ContextKt.destroy(ctx);
+        lwjglGlfw.shutdown();
+        ctx.shutdown();
     }
 }
