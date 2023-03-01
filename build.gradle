@@ -39,6 +39,14 @@ subprojects {
     maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
     maven { url 'https://jitpack.io' }
   }
+
+  dependencies {
+    api "io.github.spair:imgui-java-binding:$imguiVersion"
+    api "io.github.spair:imgui-java-lwjgl3:$imguiVersion"
+    api "io.github.spair:imgui-java-natives-linux:$imguiVersion"
+    api "io.github.spair:imgui-java-natives-macos:$imguiVersion"
+    api "io.github.spair:imgui-java-natives-windows:$imguiVersion"
+  }
 }
 
 eclipse.project.name = 'imguiexample' + '-parent'

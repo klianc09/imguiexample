@@ -3,4 +3,7 @@ eclipse.project.name = appName + '-core'
 
 dependencies {
   api "com.badlogicgames.gdx:gdx:$gdxVersion"
+
+  // spair imgui requires lwjgl3 dependency in core, which isn't exactly ideal for projects that have other targets than desktop
+  implementation "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
 }

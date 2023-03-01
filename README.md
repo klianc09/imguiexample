@@ -1,39 +1,21 @@
 # ImGui + LibGDX example project
-An example project showing Java code on how to use [imgui](https://github.com/kotlin-graphics/imgui) together with [libgdx](https://github.com/libgdx/libgdx).
+An example project showing Java code on how to use [SpaiR/imgui-java](https://github.com/SpaiR/imgui-java) together with [libgdx](https://github.com/libgdx/libgdx).
 
-See [the imgui wiki page](https://github.com/kotlin-graphics/imgui/wiki/Using-libGDX) for step by step instructions.
+The [the official libgdx wiki](https://libgdx.com/wiki/graphics/2d/imgui) points to multiple ImGui java implementations, but at the time of writing (March 2023) none of the examples seem to be self-contained, nor up-to-date.
 
+[SpaiR/imgui-java](https://github.com/SpaiR/imgui-java) simply was chosen, because it was the only one I could get to work.
 
-# imguiexample
+The largest caveat this setup currently has is, that it requires the 'core' project to have a dependency on the lwjgl3 backend to get the GLFW window handle.
+If you have subprojects other than desktop (e.g. html), this might be a problem, otherwise this is probably fine.
 
-A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
+## Project Generation
 
-This project was generated with a template including simple application launchers and an `ApplicationAdapter` extension that draws libGDX logo.
+The base libGDX project itself was generated with [gdx-liftoff](https://github.com/tommyettinger/gdx-liftoff).
+Which might have a slightly different structure in terms of gradle files than the default libgdx-setup.
 
-## Platforms
+## Relevant Files
 
-- `core`: Main module with the application logic shared by all platforms.
-- `lwjgl3`: Primary desktop platform using LWJGL3.
-
-## Gradle
-
-This project uses [Gradle](http://gradle.org/) to manage dependencies.
-The Gradle wrapper was included, so you can run Gradle tasks using `gradlew.bat` or `./gradlew` commands.
-Useful Gradle tasks and flags:
-
-- `--continue`: when using this flag, errors will not stop the tasks from running.
-- `--daemon`: thanks to this flag, Gradle daemon will be used to run chosen tasks.
-- `--offline`: when using this flag, cached dependency archives will be used.
-- `--refresh-dependencies`: this flag forces validation of all dependencies. Useful for snapshot versions.
-- `build`: builds sources and archives of every project.
-- `cleanEclipse`: removes Eclipse project data.
-- `cleanIdea`: removes IntelliJ project data.
-- `clean`: removes `build` folders, which store compiled classes and built archives.
-- `eclipse`: generates Eclipse project data.
-- `idea`: generates IntelliJ project data.
-- `lwjgl3:jar`: builds application's runnable jar, which can be found at `lwjgl3/build/libs`.
-- `lwjgl3:run`: starts the application.
-- `test`: runs unit tests (if any).
-
-Note that most tasks that are not specific to a single project can be run with `name:` prefix, where the `name` should be replaced with the ID of a specific project.
-For example, `core:clean` removes `build` folder only from the `core` project.
+gradle.properties - Defines the imgui version used
+build.gradle - Defines the imgui dependencies for the core and lwjgl3 subproject
+core/build.gradle - Defines the lwjgl3 dependency needed in core (sadly)
+core/src/main/java/at/example/Main - Shows how to setup ImGui (contained in the MyImgui inner class)
