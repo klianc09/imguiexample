@@ -1,13 +1,16 @@
 buildscript {
   repositories {
-    mavenLocal()
     mavenCentral()
-    jcenter()
+    maven { url 'https://s01.oss.sonatype.org' }
+    mavenLocal()
     google()
+    gradlePluginPortal()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
   }
   dependencies {
-    classpath "com.badlogicgames.gdx:gdx-tools:$gdxVersion"
+
+
   }
 }
 
@@ -17,26 +20,25 @@ allprojects {
 }
 
 configure(subprojects) {
-  apply plugin: 'java'
-  sourceCompatibility = 1.6
-}
-
-subprojects {
-  version = '0.0.1-SNAPSHOT'
-  ext.appName = 'MinimalExample'
-  repositories {
-    mavenLocal()
-    mavenCentral()
-    jcenter()
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-    maven { url 'https://jitpack.io' }
-    maven { url "https://dl.bintray.com/kotlin/kotlin-dev" } // Required since imgui uses version 1.2 of Kotlin
+  apply plugin: 'java-library'
+  sourceCompatibility = 1.8
+  compileJava {
+    options.incremental = true
   }
 }
 
-// Clearing Eclipse project data in root folder:
-tasks.eclipse.doLast {
-  delete '.project'
-  delete '.classpath'
-  delete '.settings/'
+subprojects {
+  version = '0.0.1'
+  ext.appName = 'imguiexample'
+  repositories {
+    mavenCentral()
+    maven { url 'https://s01.oss.sonatype.org' }
+    mavenLocal()
+    gradlePluginPortal()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://jitpack.io' }
+  }
 }
+
+eclipse.project.name = 'imguiexample' + '-parent'
