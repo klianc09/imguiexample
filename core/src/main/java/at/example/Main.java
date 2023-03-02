@@ -6,10 +6,10 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import imgui.ImGui;
 import imgui.ImGuiIO;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
-import imgui.internal.ImGui;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 
@@ -60,7 +60,7 @@ public class Main extends ApplicationAdapter {
             long windowHandle = ((Lwjgl3Graphics) Gdx.graphics).getWindow().getWindowHandle();
             GLFW.glfwMakeContextCurrent(windowHandle);
             GL.createCapabilities();
-            imgui.internal.ImGui.createContext();
+            ImGui.createContext();
             ImGuiIO io = ImGui.getIO();
             io.setIniFilename(null);
             io.getFonts().addFontDefault();
